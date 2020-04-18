@@ -11,3 +11,8 @@ The convertion of the file should not take too much time depending on your machi
 
 You can view and you are welcome to edit the source code and even contribute.
 We are planning on updating the program to add more mimepipes support for audio as well for video.
+
+
+This project uses open source libraries to achieve its goal. 
+1)Youtube Explode
+2)Xabe.FFmpeg

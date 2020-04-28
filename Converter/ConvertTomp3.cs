@@ -42,6 +42,28 @@ namespace Converter
                 //Begin the actual process of convertion
                 IConversionResult result = await Conversion.ExtractAudio(song, output)
                 .Start();
+
+                //Write Metadata to the file
+                Status.Report("Writing Metadata...");
+                var data = await Downloader.GetMetaData(url, new Progress<string>());
+
+                var tfile = TagLib.File.Create(output);
+                tfile.Tag.Title = data.Title;
+                tfile.Tag.Performers = new string[] { data.Artist };
+                TagLib.Picture pic = new TagLib.Picture
+                {
+                    Type = TagLib.PictureType.FrontCover,
+                    Description = "Cover",
+                    MimeType = System.Net.Mime.MediaTypeNames.Image.Jpeg
+                };
+                MemoryStream ms = new MemoryStream();
+                data.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                ms.Position = 0;
+                pic.Data = TagLib.ByteVector.FromStream(ms);
+                tfile.Tag.Pictures = new TagLib.IPicture[] { pic };
+                tfile.Save();
+                ms.Close();
+
                 //Clean up Section
                 //Delete the webm file and move the mp3 file to the user provided folder.
                 Status.Report("Status: Clean Up...");

@@ -73,6 +73,10 @@ namespace Converter
                 File.Move(output, finalPath);
                 Status.Report("Status: Convertion Complete and file Saved at: \n" + finalPath);
             }
+            catch (System.Collections.Generic.KeyNotFoundException)
+            {
+                Status.Report("Could not find a download url. Try a different video");
+            }
             catch (Exception ex)
             {
                 Status.Report(ex.Message);

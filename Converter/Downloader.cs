@@ -84,7 +84,7 @@ namespace Converter
             Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
             title = r.Replace(title, "");
             //Download the audio
-            await youtube.Videos.Streams.DownloadAsync(streamInfo, Path.Combine(Path.GetTempPath() ,$"{title}.{streamInfo.Container}"), progress);
+            await youtube.Videos.Streams.DownloadAsync(streamInfo, Path.Combine(Path.GetTempPath(), $"{title}.{streamInfo.Container}"), progress);
             Status.Report("Status: Download Complete");
             return Path.Combine(Path.GetTempPath(), $"{title}.{streamInfo.Container}");
         }
@@ -125,6 +125,10 @@ namespace Converter
                 await youtube.Videos.Streams.DownloadAsync(streamInfo, Path.Combine(saveLocation, $"{title}.{streamInfo.Container}"), progress);
                 Status.Report("Status: Download Complete");
 
+            }
+            catch (System.Collections.Generic.KeyNotFoundException)
+            {
+                Status.Report("Could not find a download url. Try a different video");
             }
             catch (Exception ex) { Status.Report(ex.Message); }
             finally { Completed.Report(true); }

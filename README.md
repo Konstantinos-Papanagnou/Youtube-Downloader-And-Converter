@@ -16,3 +16,6 @@ We are planning on updating the program to add more mimepipes support for audio 
 This project uses open source libraries to achieve its goal. 
 1)Youtube Explode
 2)Xabe.FFmpeg
+3)TagLibSharp
+
+Updated Libraries and Exception Handling

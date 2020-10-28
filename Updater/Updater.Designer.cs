@@ -69,7 +69,9 @@
             this.Controls.Add(this.Progresslabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.progressBar1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Updater";
             this.Text = "Pap Converter Updater";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Updater_FormClosing);

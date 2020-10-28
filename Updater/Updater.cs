@@ -178,8 +178,10 @@ namespace Updater
 
         private void StartProgram()
         {
-            if (ProgramKilled)
-                System.Diagnostics.Process.Start("Pap Converter.exe");
+            if (!ProgramKilled)
+                return;
+            System.Diagnostics.Process.Start("Pap Converter.exe");
+            ProgramKilled = false;
         }
 
         private bool CheckForUpdates(out VersionData remoteUrl)

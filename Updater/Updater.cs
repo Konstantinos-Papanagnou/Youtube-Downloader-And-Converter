@@ -187,7 +187,7 @@ namespace Updater
             string currentVersion = GetCurrentVersion();
             VersionData data = GetCloudVersion();
             remoteUrl = data;
-            return currentVersion != data.VersionNumber; // if current version is not equal to 
+            return currentVersion != data.VersionNumber; // if current version is not equal to the cloud version BeginUpdate
         }
 
         private string GetCurrentVersion()

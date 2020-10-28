@@ -39,6 +39,9 @@ namespace Updater
         readonly string VersionFolder; 
         readonly string VersionPath;
         const string setup = "https://github.com/Konstantinos-Papanagnou/Youtube-Downloader-And-Converter/raw/master/setup/Pap%20Converter%20Setup.exe";
+        Thread UpdateThread;
+
+
         public Updater(int PID)
         {
             InitializeComponent();
@@ -48,8 +51,8 @@ namespace Updater
             VersionFolder = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pap Converter");
             VersionPath = System.IO.Path.Combine(VersionFolder, "version.txt");
             Directory.CreateDirectory(VersionFolder);
-            Thread t = new Thread(new ThreadStart(BeginUpdate));
-            t.Start();
+            UpdateThread = new Thread(new ThreadStart(BeginUpdate));
+            UpdateThread.Start();
         }
 
         public void BeginUpdate()
@@ -214,6 +217,7 @@ namespace Updater
             if (!Updating)
             {
                 StartProgram();
+                UpdateThread.Abort();
                 Application.Exit();
             }
             else MessageBox.Show("Pap Converter is Updating. Exiting the Updater during the update process is not recommended...", "Updater.exe");

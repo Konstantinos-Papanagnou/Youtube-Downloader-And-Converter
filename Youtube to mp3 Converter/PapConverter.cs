@@ -1,5 +1,6 @@
 ﻿using Converter;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -103,6 +104,11 @@ namespace Youtube_to_mp3_Converter
         private void troubleshootingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("The main issue we can find at the momment is the Access Denied error. When an error like that occurs you will see an Access Denied indicator on the status at the bottom left side of the program. The cause of that is probably your antivirus blocking us from saving the converted file to the folder you specified (Filter should be called \"Safe Files\") and you can take one of the following actions to fix it.\n\n   Fix N.1: Give permissions to our app in your antivirus to be able to write to those folders.\n  Fix N.2: If you don't like the idea of our app having permissions to change the protected folders, select another folder to save your file.", "Troubleshooting", MessageBoxButtons.OK);
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(new ProcessStartInfo("Updater.exe", Process.GetCurrentProcess().Id.ToString()));
         }
     }
 }

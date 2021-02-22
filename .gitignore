@@ -1,2 +1,4 @@
 obj/
 bin/
+packages/
+ffmpeg-20200417-889ad93-win64-static.zip

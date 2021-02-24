@@ -114,6 +114,7 @@ namespace Updater
         private bool CheckForMinor(string versionCode)
         {
             string localVer = GetCurrentVersion();
+            if (localVer == "0.0.0") return true;
             return versionCode.Split('.')[1] == localVer.Split('.')[1] || int.Parse(versionCode.Split('.')[1]) - int.Parse(localVer.Split('.')[1]) == 1;
         }
 
@@ -202,7 +203,7 @@ namespace Updater
             }
             else
             {
-                return GetCloudVersion().VersionNumber;
+                return "0.0.0";
             }
         }
 

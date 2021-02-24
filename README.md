@@ -20,6 +20,6 @@ This project uses open source libraries to achieve its goal.
 
 Updated Libraries and Exception Handling
 
-# In case you have issues with the Updater and always suggests there are no updates available, we are aware of this issue and we just fixed it.
-# You can either manually patch the Updater by downloading the latest update from [Update.exe](setup/Update/Update.exe) and install the patch.
-# If you don't wanna get into this procedure you can just enter `echo "0.0.0" > "C:\Users\{username}\AppData\Roaming\Pap Converter\version.txt"` in the command prompt where {username} is your username in your computer.
+## In case you have issues with the Updater and always suggests there are no updates available, we are aware of this issue and we just fixed it.
+#### You can either manually patch the Updater by downloading the latest update from [Update.exe](setup/Update/Update.exe) and install the patch.
+#### If you don't wanna get into this procedure you can just enter `echo "0.0.0" > "C:\Users\{username}\AppData\Roaming\Pap Converter\version.txt"` in the command prompt where {username} is your username in your computer.

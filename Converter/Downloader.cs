@@ -33,15 +33,35 @@ namespace Converter
                 var video = await youtube.Videos.GetAsync(url);
                 WebClient client = new WebClient();
                 //Ream them and save them
-                Stream stream = client.OpenRead(video.Thumbnails.MediumResUrl);
-                //Create a model to return
-                MetaDataModel model = new MetaDataModel()
+                Stream stream = null;
+                MetaDataModel model = null;
+                foreach (var thumbnail in video.Thumbnails)
                 {
-                    Title = video.Title,
-                    Artist = video.Author,
-                    Duration = video.Duration.Minutes.ToString() + ":" + video.Duration.Seconds.ToString(),
-                    Image = new Bitmap(stream)
-                };
+                    try
+                    {
+                        stream = client.OpenRead(thumbnail.Url);
+                        //Create a model to return
+                        model = new MetaDataModel()
+                        {
+                            Title = video.Title,
+                            Artist = video.Author.Title,
+                            Duration = video.Duration.ToString(),
+                            Image = new Bitmap(stream)
+                        };
+                        break;
+                    }
+                    catch { }
+                }
+                if (model == null)
+                {
+                    model = new MetaDataModel()
+                    {
+                        Title = video.Title,
+                        Artist = video.Author.Title,
+                        Duration = video.Duration.ToString(),
+                        Image = null
+                    };
+                }
                 stream.Flush();
                 stream.Close();
                 client.Dispose();
@@ -77,7 +97,7 @@ namespace Converter
             var streamManifest = await youtube.Videos.Streams.GetManifestAsync(url);
 
             // Select the highest Quality audio that exists
-            var streamInfo = streamManifest.GetAudioOnly().OrderBy(s => s.Bitrate).Last();
+            var streamInfo = streamManifest.GetAudioOnlyStreams().OrderBy(s => s.Bitrate).Last();
 
             //Remove the invalid and illegal Filename chars from the title
             string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
@@ -115,7 +135,7 @@ namespace Converter
                 var streamManifest = await youtube.Videos.Streams.GetManifestAsync(url);
 
                 //Select the highest possible quality to download
-                var streamInfo = streamManifest.GetMuxed().OrderBy(s => s.VideoQuality).Last();
+                var streamInfo = streamManifest.GetMuxedStreams().OrderBy(s => s.VideoQuality).Last();
 
                 //Remove the invalid and illegal characters from the title
                 string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());

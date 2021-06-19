@@ -97,9 +97,6 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="YoutubeExplode, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YoutubeExplode.6.0.0-alpha2\lib\net461\YoutubeExplode.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PapConverter.cs">
@@ -137,12 +134,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Converter\Converter.csproj">
-      <Project>{cdf43da2-1851-4741-a7a2-16ae71d7d35b}</Project>
-      <Name>Converter</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Pap Converter.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +147,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Converter\Converter.csproj">
+      <Project>{cdf43da2-1851-4741-a7a2-16ae71d7d35b}</Project>
+      <Name>Converter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

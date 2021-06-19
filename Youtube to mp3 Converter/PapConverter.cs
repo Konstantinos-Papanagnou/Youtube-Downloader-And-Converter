@@ -27,7 +27,6 @@ namespace Youtube_to_mp3_Converter
         {
             //Setup a IProgress Variable to get some live feedback from the API
             var Status = new Progress<string>(p => Statuslbl.Text = p);
-
             //Grab the metadata from the youtube
             Converter.MetaDataModel data = await Downloader.GetMetaData(Url.Text, Status);
             //If returned null some error occured that will be indicated at the status
@@ -39,7 +38,8 @@ namespace Youtube_to_mp3_Converter
             //If everything are ok then populate the fields 
             Titlelbl.Text = data.Title;
             Artistlbl.Text = data.Artist;
-            Image.Image = data.Image;
+            if (data.Image != null)
+                Image.Image = data.Image;
             Duration.Text = data.Duration;
             Convert.Enabled = true;
         }

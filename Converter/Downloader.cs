@@ -44,7 +44,7 @@ namespace Converter
                         model = new MetaDataModel()
                         {
                             Title = video.Title,
-                            Artist = video.Author.Title,
+                            Artist = video.Author.ChannelTitle,
                             Duration = video.Duration.ToString(),
                             Image = new Bitmap(stream)
                         };
@@ -57,7 +57,7 @@ namespace Converter
                     model = new MetaDataModel()
                     {
                         Title = video.Title,
-                        Artist = video.Author.Title,
+                        Artist = video.Author.ChannelTitle,
                         Duration = video.Duration.ToString(),
                         Image = null
                     };
@@ -68,8 +68,9 @@ namespace Converter
                 Status.Report("Status: Fetched Video MetaData");
                 return model;
             }
-            catch
+            catch (Exception ex)
             {
+                Status.Report(ex.Message);
                 Status.Report("Status: Url Not Found");
                 return null;
             }
